@@ -1,9 +1,12 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert';
+import { readFileSync } from 'node:fs';
+
+const packageJsonUrl = new URL('../package.json', import.meta.url);
 
 describe('agentcapsule', () => {
   it('package.json should have all required metadata', () => {
-    const pkg = JSON.parse(require('fs').readFileSync(require.resolve('../package.json'), 'utf8'));
+    const pkg = JSON.parse(readFileSync(packageJsonUrl, 'utf8'));
     assert.ok(pkg.name, 'name required');
     assert.ok(pkg.version, 'version required');
     assert.ok(pkg.author && pkg.author !== 'StackForge User', 'author must not be StackForge User');
