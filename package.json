@@ -4,7 +4,7 @@
   "description": "Local-first context capsules for coding-agent handoffs.",
   "type": "module",
   "bin": {
-    "agentcapsule": "./dist/cli.js"
+    "agentcapsule": "./dist/src/bin.js"
   },
   "main": "./dist/index.js",
   "exports": {
