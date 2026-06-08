@@ -2,7 +2,7 @@ import { describe, it } from 'node:test';
 import assert from 'node:assert';
 import { readFileSync } from 'node:fs';
 
-const packageJsonUrl = new URL('../package.json', import.meta.url);
+const packageJsonUrl = new URL('../../package.json', import.meta.url);
 
 describe('agentcapsule', () => {
   it('package.json should have all required metadata', () => {
