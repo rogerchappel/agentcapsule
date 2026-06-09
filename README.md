@@ -9,19 +9,19 @@ security posture before using it in production.
 
 ## Install
 
-Replace this section with the generated repository's installation steps.
+Install dependencies and build the local CLI:
 
 ```sh
-pnpm install
+npm install
+npm run build
 ```
 
 ## Use
 
-Replace this section with the smallest useful example for the generated
-repository.
+Run the packaged CLI from a checkout:
 
 ```sh
-pnpm dev
+npx agentcapsule
 ```
 
 ## Verify
@@ -29,6 +29,12 @@ pnpm dev
 Run the local validation script before opening a pull request:
 
 ```sh
+npm test
+npm run check
+npm run build
+npm run smoke
+npm run package:smoke
+npm run release:check
 bash scripts/validate.sh
 ```
 
