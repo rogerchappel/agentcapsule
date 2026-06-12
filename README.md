@@ -40,6 +40,16 @@ bash scripts/validate.sh
 
 `scripts/validate.sh` runs the repository's standard local checks when they are defined and will also run `agent-qc ready` when `agent-qc` is installed. Missing `agent-qc` is treated as a skip, not a failure.
 
+## Package contents
+
+The npm package entrypoint is `dist/src/index.js` and the CLI is
+`dist/src/bin.js`. The package allowlist includes the compiled runtime, docs,
+and release support files: `README.md`, `LICENSE`, `SECURITY.md`,
+`CHANGELOG.md`, `CONTRIBUTING.md`, and `CODE_OF_CONDUCT.md`.
+
+Run `npm run package:smoke` before publishing to confirm the tarball matches
+those paths.
+
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution expectations. Changes

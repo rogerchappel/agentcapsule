@@ -6,9 +6,9 @@
   "bin": {
     "agentcapsule": "./dist/src/bin.js"
   },
-  "main": "./dist/index.js",
+  "main": "./dist/src/index.js",
   "exports": {
-    ".": "./dist/index.js"
+    ".": "./dist/src/index.js"
   },
   "files": [
     "dist",
@@ -17,14 +17,15 @@
     "LICENSE",
     "SECURITY.md",
     "CHANGELOG.md",
-    "CONTRIBUTING.md"
+    "CONTRIBUTING.md",
+    "CODE_OF_CONDUCT.md"
   ],
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "check": "tsc -p tsconfig.json --noEmit",
     "test": "npm run build && node --test \"dist/test/**/*.test.js\"",
     "smoke": "bash scripts/smoke.sh",
-    "package:smoke": "npm pack --dry-run",
+    "package:smoke": "npm run build && npm pack --dry-run",
     "release:check": "npm test && npm run check && npm run build && npm run smoke && npm run package:smoke"
   },
   "keywords": [
@@ -46,7 +47,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/rogerchappel/agentcapsule"
+    "url": "git+https://github.com/rogerchappel/agentcapsule.git"
   },
   "bugs": {
     "url": "https://github.com/rogerchappel/agentcapsule/issues"
