@@ -35,7 +35,7 @@
     "archive",
     "manifest"
   ],
-  "author": "Roger's OSS factory",
+  "author": "Roger Chappel",
   "license": "MIT",
   "dependencies": {
     "minimatch": "^10.2.5",
