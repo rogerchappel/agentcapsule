@@ -16,13 +16,32 @@ npm install
 npm run build
 ```
 
-## Use
+## Quickstart
 
-Run the packaged CLI from a checkout:
+Create a capsule from a local project:
 
 ```sh
-npx agentcapsule
+npm install
+npm run build
+node dist/src/bin.js init --root /path/to/project
+node dist/src/bin.js pack --root /path/to/project --note "handoff for reviewer"
+node dist/src/bin.js inspect /path/to/project/.agentcapsule/handoff.tar.gz
 ```
+
+Unpack into a separate directory when you need to review the captured files:
+
+```sh
+node dist/src/bin.js unpack /path/to/project/.agentcapsule/handoff.tar.gz --out tmp/unpacked-capsule
+```
+
+After installation from npm, use the same commands through `agentcapsule`.
+
+## CLI commands
+
+- `agentcapsule init [--root <dir>] [--force]` writes `agentcapsule.config.json`.
+- `agentcapsule pack [--root <dir>] [--note <text>]` creates `.agentcapsule/<name>.tar.gz` plus a manifest.
+- `agentcapsule inspect <archive>` prints the capsule manifest as JSON.
+- `agentcapsule unpack <archive> --out <dir> [--force]` extracts with path traversal and overwrite guards.
 
 ## Verify
 
@@ -49,6 +68,13 @@ and release support files: `README.md`, `LICENSE`, `SECURITY.md`,
 
 Run `npm run package:smoke` before publishing to confirm the tarball matches
 those paths.
+
+## Safety model
+
+AgentCapsule reads local files selected by `agentcapsule.config.json`, skips
+common secret file patterns by default, and writes archives under the target
+project's `.agentcapsule/` directory. It does not upload archives or call
+external services. Review the generated manifest before sharing a capsule.
 
 ## Contributing
 
