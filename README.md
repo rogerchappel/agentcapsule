@@ -8,6 +8,14 @@ This repository is early-stage. Use it for local developer automation and review
 
 ## Install
 
+Install the published CLI:
+
+```sh
+npm install -g agentcapsule
+```
+
+For local development:
+
 ```sh
 npm ci
 npm run build
@@ -31,8 +39,15 @@ npm test
 
 ```sh
 npm test
+npm run check
+npm run smoke
 npm run package:smoke
+npm run release:check
 ```
+
+`npm run release:check` is the release-readiness gate used before publishing or
+promotion. It covers the build, type check, tests, CLI smoke path, and dry-run
+package contents.
 
 ## Contributing
 
