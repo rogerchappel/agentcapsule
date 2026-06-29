@@ -19,7 +19,9 @@ Agent handoffs are usually a pasted summary plus "go look around." That loses ev
 ## V1 Scope
 
 - `init` a capsule config with include/exclude globs.
+- `plan` a capsule before archive creation so agents can review included files, skipped files, command receipt intent, and safety warnings.
 - `pack` a directory into `.agentcapsule/<name>.tar.gz` plus manifest JSON.
+- `check` a capsule archive or manifest for unsafe paths, duplicate entries, failed command receipts, and manifest total mismatches.
 - `inspect` an existing capsule without unpacking.
 - `unpack` into a chosen directory with overwrite protection.
 - Support notes, command receipts, checksums, and size limits.

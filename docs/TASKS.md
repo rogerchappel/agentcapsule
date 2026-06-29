@@ -6,6 +6,9 @@
 - Expose a packaged CLI entrypoint through `agentcapsule`.
 - Include public support files and release-candidate guidance in package contents.
 - Cover package metadata with a fixture-backed Node test.
+- Add `plan` for pre-pack file selection review and warning capture.
+- Add `check` for archive or manifest validation before handoff.
+- Add CLI smoke coverage for plan, pack, check, inspect, and unpack.
 
 ## Release Readiness
 
@@ -15,6 +18,6 @@
 
 ## Next Candidates
 
-- Expand CLI commands for pack, unpack, and inspect flows.
-- Add smoke fixtures for capsule manifests and safe archive extraction.
+- Add richer command receipt redaction and truncation policies.
+- Add smoke fixtures for custom include/exclude templates.
 - Document limits for capsule size, excluded paths, and command receipts.

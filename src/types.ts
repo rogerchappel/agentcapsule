@@ -48,6 +48,28 @@ export type CapsuleManifest = {
   };
 };
 
+export type CapsulePlan = {
+  capsuleName: string;
+  root: string;
+  configPath: string;
+  include: string[];
+  exclude: string[];
+  commands: CapsuleCommand[];
+  files: ManifestFile[];
+  skipped: SkippedFile[];
+  totals: CapsuleManifest["totals"];
+  warnings: string[];
+};
+
+export type CapsuleCheck = {
+  ok: boolean;
+  capsuleName: string;
+  fileCount: number;
+  skippedCount: number;
+  commandCount: number;
+  findings: string[];
+};
+
 export type PackResult = {
   archivePath: string;
   manifestPath: string;
@@ -59,4 +81,3 @@ export type UnpackResult = {
   entries: string[];
   skipped: SkippedFile[];
 };
-

@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 import { initConfig } from "./config.js";
+import { checkCapsule } from "./check.js";
 import { inspectCapsule } from "./inspect.js";
 import { packCapsule } from "./pack.js";
+import { planCapsule } from "./plan.js";
 import { unpackCapsule } from "./unpack.js";
 
 function help(): string {
@@ -9,14 +11,18 @@ function help(): string {
 
 Usage:
   agentcapsule init [--root <dir>] [--force]
+  agentcapsule plan [--root <dir>]
   agentcapsule pack [--root <dir>] [--note <text>]
+  agentcapsule check <archive-or-manifest>
   agentcapsule inspect <archive>
   agentcapsule unpack <archive> --out <dir> [--force]
   agentcapsule --help
 
 Commands:
   init     Write agentcapsule.config.json for a project.
+  plan     Preview selected files, skipped files, and warnings.
   pack     Create .agentcapsule/<name>.tar.gz and a manifest.
+  check    Validate a capsule archive or manifest for handoff risks.
   inspect  Print a capsule manifest as JSON.
   unpack   Extract a capsule with path traversal and overwrite guards.
 `;
@@ -59,6 +65,18 @@ export async function main(argv = process.argv.slice(2)): Promise<number> {
       process.stdout.write(`Packed ${result.manifest.totals.fileCount} file(s) to ${result.archivePath}\n`);
       process.stdout.write(`Manifest: ${result.manifestPath}\n`);
       return 0;
+    }
+
+    if (command === "plan") {
+      const plan = await planCapsule(root);
+      process.stdout.write(`${JSON.stringify(plan, null, 2)}\n`);
+      return 0;
+    }
+
+    if (command === "check" && firstArg) {
+      const check = await checkCapsule(firstArg);
+      process.stdout.write(`${JSON.stringify(check, null, 2)}\n`);
+      return check.ok ? 0 : 1;
     }
 
     if (command === "inspect" && firstArg) {
