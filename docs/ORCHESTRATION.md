@@ -11,9 +11,12 @@ AgentCapsule is intended for local context capsule preparation and inspection.
 ## Suggested Flow
 
 1. Build the package with `npm run build`.
-2. Run `agentcapsule` or future pack/inspect commands against synthetic fixtures first.
-3. Review capsule contents before sharing them with another human or agent.
-4. Run release checks before opening release PRs.
+2. Run `agentcapsule init --root <repo>` when the target has no config.
+3. Run `agentcapsule plan --root <repo>` and review included files, skipped files, and warnings before packing.
+4. Run `agentcapsule pack --root <repo> --note "<handoff purpose>"`.
+5. Run `agentcapsule check <archive>` before sharing the capsule with another human or agent.
+6. Use `agentcapsule inspect <archive>` for review and `agentcapsule unpack <archive> --out <dir>` only into a controlled directory.
+7. Run release checks before opening release PRs.
 
 ## Release Flow
 

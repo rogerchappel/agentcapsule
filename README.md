@@ -29,6 +29,22 @@ Inspect the CLI surface first:
 npx agentcapsule --help
 ```
 
+Create a local config, preview what would be included, then pack and validate a
+capsule:
+
+```sh
+agentcapsule init --root .
+agentcapsule plan --root . > capsule-plan.json
+agentcapsule pack --root . --note "handoff for issue 42"
+agentcapsule check .agentcapsule/handoff.tar.gz
+```
+
+`plan` is the safest first command for agents because it shows included files,
+skipped files, command receipts configured for capture, and warnings before an
+archive is written. `check` validates a manifest or archive for unsafe paths,
+duplicate entries, failed command receipts, checksum shape, and manifest total
+mismatches.
+
 Run the project verification command before making changes:
 
 ```sh
