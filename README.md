@@ -21,7 +21,10 @@ npm ci
 npm run build
 ```
 
-## Use
+Git installs run `npm run build` through the package `prepare` hook so the
+published `agentcapsule` bin points at a generated `dist/src/bin.js` file.
+
+## Usage
 
 Inspect the CLI surface first:
 
