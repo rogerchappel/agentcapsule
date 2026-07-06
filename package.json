@@ -27,7 +27,7 @@
     "lint": "tsc -p tsconfig.json --noEmit",
     "test": "npm run build && node --test \"dist/test/**/*.test.js\"",
     "smoke": "bash scripts/smoke.sh",
-    "package:smoke": "npm run build && npm pack --dry-run",
+    "package:smoke": "npm run build && node scripts/verify-package-bin.mjs && npm pack --dry-run",
     "release:check": "npm test && npm run check && npm run build && npm run smoke && npm run package:smoke",
     "prepare": "npm run build"
   },
