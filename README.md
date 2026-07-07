@@ -81,6 +81,13 @@ npm run smoke
 
 `npm run lint` is an alias for the repository static check so contributors can use the common npm workflow without guessing the project-specific command.
 
+## Limitations
+
+`agentcapsule` is designed for local handoff archives and manifest checks. It
+does not encrypt capsule contents, upload archives, or decide which private
+files are safe to share outside your environment. Review the generated plan and
+archive before sending a capsule to another person or service.
+
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution expectations. Keep changes small, reviewable, and backed by the verification commands above.
