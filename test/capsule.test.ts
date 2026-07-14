@@ -1,13 +1,14 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert';
 import { execFileSync } from 'node:child_process';
-import { mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
+import { cpSync, mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { validateManifest } from '../src/check.js';
 
 const packageJsonUrl = new URL('../../package.json', import.meta.url);
 const cliPath = new URL('../src/bin.js', import.meta.url);
+const fixtureUrl = new URL('../../fixtures/handoff/', import.meta.url);
 
 describe('agentcapsule', () => {
   it('package.json should have all required metadata', () => {
@@ -27,7 +28,7 @@ describe('agentcapsule', () => {
   it('compiled CLI can initialize, pack, inspect, and unpack a capsule', () => {
     const root = mkdtempSync(path.join(tmpdir(), 'agentcapsule-'));
     const out = path.join(root, 'out');
-    writeFileSync(path.join(root, 'README.md'), '# Fixture\n', 'utf8');
+    cpSync(fixtureUrl, root, { recursive: true });
 
     execFileSync(process.execPath, [cliPath.pathname, 'init', '--root', root], { encoding: 'utf8' });
     writeFileSync(path.join(root, '.env'), 'TOKEN=secret\n', 'utf8');
@@ -51,7 +52,7 @@ describe('agentcapsule', () => {
 
     const unpackOutput = execFileSync(process.execPath, [cliPath.pathname, 'unpack', archivePath, '--out', out], { encoding: 'utf8' });
     assert.match(unpackOutput, /Unpacked/);
-    assert.equal(readFileSync(path.join(out, 'README.md'), 'utf8'), '# Fixture\n');
+    assert.match(readFileSync(path.join(out, 'README.md'), 'utf8'), /Handoff Fixture/);
   });
 
   it('reports manifest validation findings deterministically', () => {
