@@ -36,3 +36,6 @@ jobs:
 
       - name: Run release checks
         run: npm run release:check
+
+      - name: Verify package contents
+        run: npm run package:smoke
